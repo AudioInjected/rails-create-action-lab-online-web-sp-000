@@ -12,6 +12,24 @@ class StudentsController < ApplicationController
   end
 
   def create
+    @student = Student.create(first_name: params[:first_name], last_name: params[:last_name])
+    
+    redirect_to student_path(@student)
   end
+  
+  if RUBY_VERSION>='2.6.0'
+  if Rails.version < '5'
+    class ActionController::TestResponse < ActionDispatch::TestResponse
+      def recycle!
+        # hack to avoid MonitorMixin double-initialize error:
+        @mon_mutex_owner_object_id = nil
+        @mon_mutex = nil
+        initialize
+      end
+    end
+  else
+    puts "Monkeypatch for ActionController::TestResponse no longer needed"
+  end
+end
 
 end
