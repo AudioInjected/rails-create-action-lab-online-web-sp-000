@@ -17,6 +17,10 @@ class StudentsController < ApplicationController
     redirect_to student_path(@student)
   end
   
+  
+  # Got a wierd error while running tests called thread error
+  # I copied and pasted the error in google and found this 
+
   if RUBY_VERSION>='2.6.0'
   if Rails.version < '5'
     class ActionController::TestResponse < ActionDispatch::TestResponse
